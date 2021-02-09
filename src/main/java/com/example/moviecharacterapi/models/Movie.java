@@ -33,11 +33,14 @@ public class Movie {
     private List<Character> characters;
 
     @JsonGetter("characters")
-    public List<String> getCharacters() {
-        return characters.stream()
-                .map(character -> {
-                    return "/api/v1/characters/" + character.getId();
-                }).collect(Collectors.toList());
+    public List<String> charactersGetter() {
+        if(characters != null) {
+            return characters.stream()
+                    .map(character -> {
+                        return "/api/v1/characters/" + character.getId();
+                    }).collect(Collectors.toList());
+        }
+        return null;
     }
 
     @ManyToOne
@@ -45,14 +48,13 @@ public class Movie {
     private Franchise franchise;
 
     @JsonGetter("franchise")
-    public String franchise() {
-        if(franchise != null){
+    public String franchiseGetter() {
+        if (franchise != null) {
             return "/api/v1/franchises/" + franchise.getId();
-        }else{
+        } else {
             return null;
         }
     }
-
 
     public Movie() {
 
@@ -114,15 +116,15 @@ public class Movie {
         this.trailer = trailer;
     }
 
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
-
     public Franchise getFranchise() {
         return franchise;
     }
 
     public void setFranchise(Franchise franchise) {
         this.franchise = franchise;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
     }
 }

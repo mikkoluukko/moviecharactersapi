@@ -25,7 +25,7 @@ public class Character {
 
     @JsonGetter("movies")
     public List<String> moviesGetter() {
-        if(movies != null){
+        if (movies != null) {
             return movies.stream()
                     .map(movie -> {
                         return "/api/v1/movies/" + movie.getId();

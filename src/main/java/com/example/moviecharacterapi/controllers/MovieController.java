@@ -1,12 +1,15 @@
 package com.example.moviecharacterapi.controllers;
 
+import com.example.moviecharacterapi.models.Character;
 import com.example.moviecharacterapi.models.Movie;
+import com.example.moviecharacterapi.repositories.CharacterRepository;
 import com.example.moviecharacterapi.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,9 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private CharacterRepository characterRepository;
 
     @GetMapping()
     public ResponseEntity<List<Movie>> getAllMovies() {
@@ -29,14 +35,29 @@ public class MovieController {
         Movie returnMovie = new Movie();
         HttpStatus status;
         // We first check if the author exists, this saves some computing time.
-        if(movieRepository.existsById(id)){
+        if (movieRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnMovie = movieRepository.findById(id).get();
         } else {
             status = HttpStatus.NOT_FOUND;
         }
         return new ResponseEntity<>(returnMovie, status);
+    }
 
+    // Get all characters in a movie
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<List<Character>> getCharactersInMovie(@PathVariable Long id) {
+        Movie returnMovie;
+        List<Character> charactersInMovie = new ArrayList<>();
+        HttpStatus status;
+        if (movieRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            returnMovie = movieRepository.findById(id).get();
+            charactersInMovie = characterRepository.findAllByMovies(returnMovie);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(charactersInMovie, status);
     }
 
     @PostMapping
@@ -47,7 +68,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie){
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         Movie returnMovie = new Movie();
         HttpStatus status;
         /*
@@ -55,12 +76,25 @@ public class MovieController {
          This is to ensure some level of security, making sure someone
          hasn't done some malicious stuff to our body.
         */
-        if(!id.equals(movie.getId())){
+        if (!id.equals(movie.getId())) {
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnMovie,status);
         }
         returnMovie = movieRepository.save(movie);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable Long id){
+        HttpStatus status;
+        // We first check if the movie exists, this saves some computing time.
+        if (movieRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            movieRepository.deleteById(id);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(status);
     }
 }
