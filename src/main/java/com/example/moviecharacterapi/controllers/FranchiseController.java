@@ -3,16 +3,14 @@ package com.example.moviecharacterapi.controllers;
 import com.example.moviecharacterapi.models.Character;
 import com.example.moviecharacterapi.models.Franchise;
 import com.example.moviecharacterapi.models.Movie;
-import com.example.moviecharacterapi.repositories.CharacterRepository;
 import com.example.moviecharacterapi.repositories.FranchiseRepository;
-import com.example.moviecharacterapi.repositories.MovieRepository;
+import com.example.moviecharacterapi.services.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -23,10 +21,7 @@ public class FranchiseController {
     private FranchiseRepository franchiseRepository;
 
     @Autowired
-    private MovieRepository movieRepository;
-
-    @Autowired
-    private CharacterRepository characterRepository;
+    private FranchiseService franchiseService;
 
     @GetMapping()
     public ResponseEntity<List<Franchise>> getAllFranchises() {
@@ -52,13 +47,11 @@ public class FranchiseController {
     // Get all the movies in a franchise
     @GetMapping("/{id}/movies")
     public ResponseEntity<List<Movie>> getMoviesInFranchise(@PathVariable Long id) {
-        Franchise returnFranchise;
         List<Movie> moviesInFranchise = new ArrayList<>();
         HttpStatus status;
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
-            returnFranchise = franchiseRepository.findById(id).get();
-            moviesInFranchise = movieRepository.findAllByFranchise(returnFranchise);
+            moviesInFranchise = franchiseService.getMoviesInFranchise(id);
         } else {
             status = HttpStatus.NOT_FOUND;
         }
@@ -66,20 +59,13 @@ public class FranchiseController {
     }
 
     // Get all the characters in a franchise
-    // NOT FINISHED -- MAY CONTAIN DUPLICATES
     @GetMapping("/{id}/characters")
-    public ResponseEntity<List<List<Character>>> getCharactersInFranchise(@PathVariable Long id) {
-        Franchise returnFranchise;
-        List<Movie> moviesInFranchise = new ArrayList<>();
-        List<List<Character>> charactersInFranchise = new ArrayList<>();
+    public ResponseEntity<Set<Character>> getCharactersInFranchise(@PathVariable Long id) {
+        Set<Character> charactersInFranchise = new HashSet<>();
         HttpStatus status;
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
-            returnFranchise = franchiseRepository.findById(id).get();
-            moviesInFranchise = movieRepository.findAllByFranchise(returnFranchise);
-            for (Movie movie : moviesInFranchise) {
-                charactersInFranchise.add(characterRepository.findAllByMovies(movie));
-            }
+            charactersInFranchise = franchiseService.getCharactersInFranchise(id);
         } else {
             status = HttpStatus.NOT_FOUND;
         }
@@ -112,7 +98,7 @@ public class FranchiseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteFranchise(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteFranchise(@PathVariable Long id) {
         HttpStatus status;
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;

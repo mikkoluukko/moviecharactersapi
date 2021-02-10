@@ -9,15 +9,23 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
-    @OneToMany(mappedBy = "franchise")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "franchise")
     private List<Movie> movies;
+
+
 
     public Franchise() {
 
+    }
+
+    public Franchise(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public long getId() {

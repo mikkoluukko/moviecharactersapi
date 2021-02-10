@@ -2,8 +2,8 @@ package com.example.moviecharacterapi.controllers;
 
 import com.example.moviecharacterapi.models.Character;
 import com.example.moviecharacterapi.models.Movie;
-import com.example.moviecharacterapi.repositories.CharacterRepository;
 import com.example.moviecharacterapi.repositories.MovieRepository;
+import com.example.moviecharacterapi.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @Autowired
-    private CharacterRepository characterRepository;
+    private MovieService movieService;
 
     @GetMapping()
     public ResponseEntity<List<Movie>> getAllMovies() {
@@ -47,13 +47,11 @@ public class MovieController {
     // Get all characters in a movie
     @GetMapping("/{id}/characters")
     public ResponseEntity<List<Character>> getCharactersInMovie(@PathVariable Long id) {
-        Movie returnMovie;
         List<Character> charactersInMovie = new ArrayList<>();
         HttpStatus status;
         if (movieRepository.existsById(id)) {
             status = HttpStatus.OK;
-            returnMovie = movieRepository.findById(id).get();
-            charactersInMovie = characterRepository.findAllByMovies(returnMovie);
+            charactersInMovie = movieService.getCharactersInMovie(id);
         } else {
             status = HttpStatus.NOT_FOUND;
         }
@@ -86,7 +84,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteMovie(@PathVariable Long id) {
         HttpStatus status;
         // We first check if the movie exists, this saves some computing time.
         if (movieRepository.existsById(id)) {
