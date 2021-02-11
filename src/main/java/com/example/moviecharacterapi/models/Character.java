@@ -23,11 +23,11 @@ public class Character {
 
     private String picture;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "character_movie",
-            joinColumns = {@JoinColumn(name = "character_id")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")}
     )
     private Set<Movie> movies;
 
@@ -96,5 +96,9 @@ public class Character {
 
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
     }
 }

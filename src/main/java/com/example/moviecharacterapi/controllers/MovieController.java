@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -67,20 +68,21 @@ public class MovieController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-        Movie returnMovie = new Movie();
-        HttpStatus status;
-        /*
-         We want to check if the request body matches what we see in the path variable.
-         This is to ensure some level of security, making sure someone
-         hasn't done some malicious stuff to our body.
-        */
-        if (!id.equals(movie.getId())) {
-            status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnMovie,status);
+        Optional<Movie> movieData = movieRepository.findById(id);
+        if (movieData.isPresent()) {
+            Movie _movie = movieData.get();
+            _movie.setTitle(movie.getTitle());
+            _movie.setGenre(movie.getGenre());
+            _movie.setReleaseYear(movie.getReleaseYear());
+            _movie.setDirector(movie.getDirector());
+            _movie.setPicture(movie.getPicture());
+            _movie.setTrailer(movie.getTrailer());
+            _movie.setFranchise(movie.getFranchise());
+            _movie.setCharacters(movie.getCharacters());
+            return new ResponseEntity<>(movieRepository.save(_movie), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        returnMovie = movieRepository.save(movie);
-        status = HttpStatus.NO_CONTENT;
-        return new ResponseEntity<>(returnMovie, status);
     }
 
     @DeleteMapping("/{id}")

@@ -17,8 +17,6 @@ public class Franchise {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "franchise")
     private List<Movie> movies;
 
-
-
     public Franchise() {
 
     }

@@ -18,7 +18,7 @@ public class Movie {
 
     private String genre;
 
-    private String releaseyear;
+    private int releaseYear;
 
     private String director;
 
@@ -26,7 +26,13 @@ public class Movie {
 
     private String trailer;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "movies", fetch = FetchType.LAZY)
+//    @ManyToMany(mappedBy = "movies")
+    @ManyToMany
+    @JoinTable(
+            name = "character_movie",
+            joinColumns = {@JoinColumn(name = "character_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+    )
     private Set<Character> characters;
 
     @JsonGetter("characters")
@@ -57,17 +63,17 @@ public class Movie {
 
     }
 
-    public Movie(String title, String genre, String releaseyear, String director) {
+    public Movie(String title, String genre, int releaseYear, String director) {
         this.title = title;
         this.genre = genre;
-        this.releaseyear = releaseyear;
+        this.releaseYear = releaseYear;
         this.director = director;
     }
 
-    public Movie(String title, String genre, String releaseyear, String director, Franchise franchise) {
+    public Movie(String title, String genre, int releaseYear, String director, Franchise franchise) {
         this.title = title;
         this.genre = genre;
-        this.releaseyear = releaseyear;
+        this.releaseYear = releaseYear;
         this.director = director;
         this.picture = picture;
         this.franchise = franchise;
@@ -97,12 +103,12 @@ public class Movie {
         this.genre = genre;
     }
 
-    public String getReleaseyear() {
-        return releaseyear;
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseyear(String releaseyear) {
-        this.releaseyear = releaseyear;
+    public void setReleaseYear(int releaseyear) {
+        this.releaseYear = releaseyear;
     }
 
     public String getDirector() {
@@ -131,6 +137,10 @@ public class Movie {
 
     public void setFranchise(Franchise franchise) {
         this.franchise = franchise;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
     }
 
     public void setCharacters(Set<Character> characters) {
