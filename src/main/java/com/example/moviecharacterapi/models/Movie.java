@@ -26,13 +26,13 @@ public class Movie {
 
     private String trailer;
 
-//    @ManyToMany(mappedBy = "movies")
     @ManyToMany
     @JoinTable(
             name = "character_movie",
             joinColumns = {@JoinColumn(name = "character_id")},
             inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
+    // Use set so it can't contain duplicates
     private Set<Character> characters;
 
     @JsonGetter("characters")
@@ -48,7 +48,7 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "franchise_id")
-    private Franchise franchise;
+    public Franchise franchise;
 
     @JsonGetter("franchise")
     public String franchiseGetter() {
@@ -63,19 +63,12 @@ public class Movie {
 
     }
 
-    public Movie(String title, String genre, int releaseYear, String director) {
-        this.title = title;
-        this.genre = genre;
-        this.releaseYear = releaseYear;
-        this.director = director;
-    }
-
+    //    Used in the DatabaseSeeder
     public Movie(String title, String genre, int releaseYear, String director, Franchise franchise) {
         this.title = title;
         this.genre = genre;
         this.releaseYear = releaseYear;
         this.director = director;
-        this.picture = picture;
         this.franchise = franchise;
     }
 

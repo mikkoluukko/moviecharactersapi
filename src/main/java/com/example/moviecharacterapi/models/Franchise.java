@@ -14,13 +14,17 @@ public class Franchise {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "franchise")
-    private List<Movie> movies;
+//    @OneToMany(mappedBy = "franchise")
+    @OneToMany
+    @JoinColumn(name = "franchise_id")
+    List<Movie> movies;
+
 
     public Franchise() {
 
     }
 
+    //    Used in the DatabaseSeeder
     public Franchise(String name, String description) {
         this.name = name;
         this.description = description;

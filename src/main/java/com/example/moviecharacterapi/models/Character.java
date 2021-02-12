@@ -29,6 +29,7 @@ public class Character {
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "character_id")}
     )
+    // Use set so it can't contain duplicates
     private Set<Movie> movies;
 
     @JsonGetter("movies")
@@ -42,11 +43,11 @@ public class Character {
         return null;
     }
 
-
     public Character() {
 
     }
 
+    //    Used in the DatabaseSeeder
     public Character(String name, String alias, String gender, Set<Movie> movies) {
         this.name = name;
         this.alias = alias;
