@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "29e0d196-0001-4e5d-8236-d45fbd1f9ec3",
+		"name": "moviecharactersapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all characters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/characters",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"characters"
+					]
+				},
+				"description": "Get all characters in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific character",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/characters/1",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"characters",
+						"1"
+					]
+				},
+				"description": "Get a specific character from the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new character",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"name\": \"Gandalf\",\r\n        \"alias\": \"Ian McKellen\",\r\n        \"gender\": \"Male\",\r\n        \"picture\": null,\r\n        \"movies\": [{\"id\":2}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/characters",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"characters"
+					]
+				},
+				"description": "Create a new character"
+			},
+			"response": []
+		},
+		{
+			"name": "Update character",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"id\": 2,\r\n        \"name\": \"Gandalf\",\r\n        \"alias\": \"Ian McKellen\",\r\n        \"gender\": \"Male\",\r\n        \"picture\": null,\r\n        \"movies\": [{\"id\":2}, {\"id\": 3}]\r\n    }\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/characters/2",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"characters",
+						"2"
+					]
+				},
+				"description": "Update an existing character"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete character",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/characters/5",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"characters",
+						"5"
+					]
+				},
+				"description": "Delete character from database"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					]
+				},
+				"description": "Get all movies in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies/1",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"1"
+					]
+				},
+				"description": "Get a specific movie from the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"title\": \"Spiderman\",\r\n        \"genre\": \"Action\",\r\n        \"releaseYear\": 2012,\r\n        \"director\": \"Marc Webb\",\r\n        \"picture\": \"picture.com\",\r\n        \"trailer\": \"youtubelink.com\",\r\n        \"characters\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					]
+				},
+				"description": "Create a new movie"
+			},
+			"response": []
+		},
+		{
+			"name": "Update movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 10,\r\n        \"title\": \"Spiderman\",\r\n        \"genre\": \"Action\",\r\n        \"releaseYear\": 2012,\r\n        \"director\": \"Marc Webb\",\r\n        \"picture\": \"picture.com\",\r\n        \"trailer\": \"youtubelink.com\",\r\n        \"characters\": [{\"id\": 1}],\r\n        \"franchise\": null\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies/10",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"10"
+					]
+				},
+				"description": "Update an existing movie"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete movie",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"movieTitle\": \"new Movie\",\r\n    \"releaseYear\": \"2001\",\r\n    \"director\": \"Lilly Director\",\r\n    \"picture\": \"someurlhere.com\",\r\n    \"trailer\": \"youtubelink.com\",\r\n    \"characters\": null,\r\n    \"franchise\": null,\r\n    \"gere\": \"Horror\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies/10",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"10"
+					]
+				},
+				"description": "Delete movie from database"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all franchises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises"
+					]
+				},
+				"description": "Get all franchises in the database\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific franchise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises/1",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises",
+						"1"
+					]
+				},
+				"description": "Get a specific franchise from the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new franchise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Twilight\",\r\n    \"description\": \"Twilight is a 2008 American romantic fantasy film.\",\r\n    \"movies\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises"
+					]
+				},
+				"description": "Create a new franchise\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Update franchise",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 3,\r\n        \"name\": \"Twilight\",\r\n        \"description\": \"Twilight is a 2008 American romantic fantasy film.\",\r\n        \"movies\": [{\"id\": 5}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises/3",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises",
+						"3"
+					]
+				},
+				"description": "Update an existing franchise"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete franchise",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"new Franchise\",\r\n    \"description\": \"Test description...\",\r\n    \"movies\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises/1",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises",
+						"1"
+					]
+				},
+				"description": "Delete franchise from database\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the movies for a franchise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises/2/movies",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises",
+						"2",
+						"movies"
+					]
+				},
+				"description": "Get all the movies for a franchise"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the characters in a franchise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/franchises/1/characters",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"franchises",
+						"1",
+						"characters"
+					]
+				},
+				"description": "Get all the characters in a franchise"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all characters in a movie ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://moviecharactersapi.herokuapp.com/api/v1/movies/1/characters",
+					"protocol": "http",
+					"host": [
+						"moviecharactersapi",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"1",
+						"characters"
+					]
+				},
+				"description": "Get all characters in a movie"
+			},
+			"response": []
+		}
+	]
+}
