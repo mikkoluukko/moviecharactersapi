@@ -46,7 +46,6 @@ public class DatabaseSeeder {
                 "Lewis Gilbert", franchise2);
         Movie movie7 = new Movie("Goldeneye", "Action, Adventure", 1995,
                 "Martin Campbell", franchise2);
-
         Character character1 = new Character("Frodo Baggins", "Mr. Underhill", "Male",
                 Stream.of(movie1, movie2, movie3).collect(Collectors.toSet()));
         Character character2 = new Character("Gollum", "Smeagol", "Male",

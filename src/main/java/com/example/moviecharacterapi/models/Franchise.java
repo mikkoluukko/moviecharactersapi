@@ -17,7 +17,6 @@ public class Franchise {
 
     private String description;
 
-//    @OneToMany(mappedBy = "franchise")
     @OneToMany
     @JoinColumn(name = "franchise_id")
     List<Movie> movies;
@@ -32,7 +31,6 @@ public class Franchise {
         }
         return null;
     }
-
 
     public Franchise() {
 

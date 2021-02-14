@@ -1,275 +1,78 @@
 #Movie Character API
+The Movie Character REST API is a remote collaboration between:
+- Kristian Andersen [@kristianAndersen](https://github.com/kristianAndersen)
+- Mikko Luukko [@mikkoluukko](https://github.com/mikkoluukko)
+- Paula Rinta-Harri [@paularintaharri](https://github.com/paularintaharri)
 
----
-The Movie character REST API is a remote collaboration between
- - Mikko Luukko [@mikkoluukko](https://github.com/mikkoluukko) 
- - Paula Rinta-Harri [@paularintaharri](https://github.com/paularintaharri) 
- - Kristian Andersen [@kristianAndersen](https://github.com/kristianAndersen) 
+##Table of contents
+- Project Goals
+- User Goals
+- Requirements
+- Documentation
+- Technologies and tools used
+- Deployment
 
+##Project  Goals
+The goal for this project was to create a working REST API with full CRUD constructed with Spring
+using Spring Data and Hibernate and a PostgreSQL database.
 
-### Table of contents
+##User  Goals
+The goal for the user is to be able to use multiple methods to obtain information via the REST API endpoints
+in addition to generic CRUD methods.
 
- - Project Goals
- - User Goals
- - Requirements 
- - Documentation  
- - Technologies
- - Deployment
+##Requirements
 
----
+###Data
+Data entities were required at minimum to provide the following information:
 
-### Project  Goals
+- Character
+    - Auto Incremented ID
+    - Full Name
+    - Alias
+    - Gender
+    - Picture
 
----
- -  The goal for this project is to create a working REST API with full CRUD.
----
+- Movie
+    - Auto Incremented ID
+    - Movie Title
+    - Genre
+    - Release year
+    - Director
+    - Picture
+    - Trailer
 
-### User  Goals
-
----
--  The Goal for the user is to be able to use multiple methods to obtain information via the REST API end-points 
-   in addition to generic READ ALL, READ ON.
-   
----
-
-### Requirements
-
----
-
-**Data** 
-
-Required entities must as a minimum be.
-
- - Character
-   - Auto Incremented ID
-   - Full Name
-   - Alias
-   - Gender
-   - Picture
-     
- - Movie
-   - Auto Incremented ID
-   - Movie Title
-   - Genre
-   - Release year
-   - Director
-   - Picture
-   - Trailer
-    
 - Franchise
-   - Auto Incremented ID
-   - Name
-   - Description
- 
-**API** 
+    - Auto Incremented ID
+    - Name
+    - Description
 
-reporting     
+###API
+Besides CRUD functionalities to manage all the entities (including generic READ ALL and READ ONE)
+the API was required to offer the following reporting endpoints:
 
 - Get all movies from a franchise
 - Get all characters in a movie
-- Get all the Characters in a franchise
-- Get All Movies
-- Get All Characters
-- Get All Franchises 
-- Get a Specific Movie
-- Get a Specific Character
-- Get a Specific Franchise
+- Get all the characters in a franchise
 
----
+##API Documentation
+API Documentation created with Postman can be found [here](https://documenter.getpostman.com/view/14576152/TWDRtftQ).
 
-### Documentation
+##Technologies and tools used
 
----
+####Java
+- Spring boot
+- Spring Data
+- Hibernate
 
-The API can be accessed or modified by standard HTTP Request's
-GET, POST, PUT, or DELETE
+####Database
+- PostgreSQL
 
-- Get all movies from a franchise
-    - /api/v1/franchises/{id}/movies
-```json
-[
-{
-  "id": 4,
-  "title": "Dr. No",
-  "genre": "Action, Adventure",
-  "releaseYear": 1962,
-  "director": "Terence Young",
-  "picture": null,
-  "trailer": null,
-  "characters": [
-    "/api/v1/characters/3"
-  ],
-  "franchise": "/api/v1/franchises/2"
-}, ...
-```
-- Get all characters in a movie
-    - /api/v1/movies/{id}/characters
-```json
+####Tools
+- IntelliJ IDEA
+- pgAdmin
 
-{
-  "id": 1,
-  "name": "Frodo Baggins",
-  "alias": "Mr. Underhill",
-  "gender": "Male",
-  "picture": null,
-  "movies": [
-    "/api/v1/movies/1",
-    "/api/v1/movies/9",
-    "/api/v1/movies/2",
-    "/api/v1/movies/3",
-    "/api/v1/movies/8"
-  ]
-}, ...
-```
-- Get all the Characters in a franchise
-  - /api/v1/franchises/{id}/characters
-```json
-  [
-    {
-    "id": 2,
-    "name": "Gollum",
-    "alias": "Smeagol",
-    "gender": "Male",
-    "picture": null,
-    "movies": [
-      "/api/v1/movies/1",
-      "/api/v1/movies/3",
-      "/api/v1/movies/2"
-    ]
-  }, ...
-```    
-- Get All Movies
-  - /api/v1/movies
-```json
-[
-{
-  "id": 2,
-  "title": "The Two Towers",
-  "genre": "Fantasy, Adventure",
-  "releaseYear": 2002,
-  "director": "Peter Jackson",
-  "picture": null,
-  "trailer": null,
-  "characters": [
-  "/api/v1/characters/1",
-  "/api/v1/characters/2"
-  ],
-  "franchise": "/api/v1/franchises/1"
-  },...
-```
+##Demonstration
+The [Movie Character API](https://moviecharactersapi.herokuapp.com/api/v1/movies) is deployed to [Heroku](heroku.com)
+on a free tier, so if it boots a bit slow just be patient.
 
-- Get All Characters
-  - /api/v1/characters
-```json
-  [
-    {
-    "id": 1,
-    "name": "Frodo Baggins",
-    "alias": "Mr. Underhill",
-    "gender": "Male",
-    "picture": null,
-    "movies": [
-      "/api/v1/movies/8",
-      "/api/v1/movies/9",
-      "/api/v1/movies/1",
-      "/api/v1/movies/2",
-      "/api/v1/movies/3"
-    ]
-  }, ...
-```    
-- Get All Franchises
-  - /api/v1/franchises
-```json
- [
- {
- "id": 1,
- "name": "The Lord of the Rings",
- "description": "The Lord of the Rings movies",
- "movies": [
- "/api/v1/movies/2",
- "/api/v1/movies/3",
- "/api/v1/movies/1"
-  ]
-  },...    
-```     
-- Get a Specific Movie
-   - /api/v1/movies/1
-````json
-{
-  "id": 1,
-  "title": "The Fellowship of the Ring",
-  "genre": "Fantasy, Adventure",
-  "releaseYear": 2001,
-  "director": "Peter Jackson",
-  "picture": null,
-  "trailer": null,
-  "characters": [
-    "/api/v1/characters/4",
-    "/api/v1/characters/3",
-    "/api/v1/characters/2",
-    "/api/v1/characters/1"
-  ],
-  "franchise": "/api/v1/franchises/1"
-}
-````    
-- Get a Specific Character
-  - /api/v1/characters/1
-```json
-{
-  "id": 1,
-  "name": "Frodo Baggins",
-  "alias": "Mr. Underhill",
-  "gender": "Male",
-  "picture": null,
-  "movies": [
-    "/api/v1/movies/8",
-    "/api/v1/movies/9",
-    "/api/v1/movies/1",
-    "/api/v1/movies/2",
-    "/api/v1/movies/3"
-  ]
-}
-```    
-- Get a Specific Franchise
-  - /api/v1/franchises/{id}
-```json
-{
-  "id": 1,
-  "name": "The Lord of the Rings",
-  "description": "The Lord of the Rings movies",
-  "movies": [
-    "/api/v1/movies/2",
-    "/api/v1/movies/3",
-    "/api/v1/movies/1"
-  ]
-}
-```
-
-
-The REST API can be tested in Postman using the collection provided [here](moviecharactersapi.postman_collection.json)
-
-
-
----
-
-### Technologies
-
----
-
-**Java**
- - Spring boot
- - Spring Data
- - Hibernate
-
-**Data**
- - postgreSQL 
- - pgAdmin
-
----
-
-### Deployment
-
----
-
-The [Movie Character API](https://moviecharactersapi.herokuapp.com/api/v1/movies) is deployed to [Heroku](heroku.com) 
-on a free tier, so if it boots a bit slow just be patient. 
+The REST API can also be tested with Postman using the collection provided [here](https://github.com/mikkoluukko/moviecharactersapi/blob/master/moviecharactersapi.postman_collection.json).

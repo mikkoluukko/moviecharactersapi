@@ -29,7 +29,7 @@ public class Character {
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "character_id")}
     )
-    // Use set so it can't contain duplicates
+    // Use set so movies can't contain duplicates
     private Set<Movie> movies;
 
     @JsonGetter("movies")

@@ -28,7 +28,6 @@ public class CharacterController {
     public ResponseEntity<Character> getCharacter(@PathVariable Long id) {
         Character returnCharacter = new Character();
         HttpStatus status;
-        // We first check if the character exists, this saves some computing time.
         if (characterRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnCharacter = characterRepository.findById(id).get();
@@ -67,7 +66,6 @@ public class CharacterController {
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteCharacter(@PathVariable Long id) {
         HttpStatus status;
-        // We first check if the character exists, this saves some computing time.
         if (characterRepository.existsById(id)) {
             status = HttpStatus.OK;
             characterRepository.deleteById(id);

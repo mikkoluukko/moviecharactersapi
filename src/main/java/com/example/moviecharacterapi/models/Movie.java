@@ -32,7 +32,7 @@ public class Movie {
             joinColumns = {@JoinColumn(name = "character_id")},
             inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
-    // Use set so it can't contain duplicates
+    // Use set so characters can't contain duplicates
     private Set<Character> characters;
 
     @JsonGetter("characters")
@@ -48,7 +48,7 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "franchise_id")
-    public Franchise franchise;
+    private Franchise franchise;
 
     @JsonGetter("franchise")
     public String franchiseGetter() {

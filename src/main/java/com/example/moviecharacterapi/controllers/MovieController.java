@@ -34,7 +34,6 @@ public class MovieController {
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
         Movie returnMovie = new Movie();
         HttpStatus status;
-        // We first check if the author exists, this saves some computing time.
         if (movieRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnMovie = movieRepository.findById(id).get();
@@ -86,7 +85,6 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteMovie(@PathVariable Long id) {
         HttpStatus status;
-        // We first check if the movie exists, this saves some computing time.
         if (movieRepository.existsById(id)) {
             status = HttpStatus.OK;
             movieRepository.deleteById(id);

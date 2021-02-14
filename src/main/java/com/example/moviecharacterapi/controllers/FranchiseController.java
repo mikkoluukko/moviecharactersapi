@@ -34,7 +34,6 @@ public class FranchiseController {
     public ResponseEntity<Franchise> getFranchise(@PathVariable Long id) {
         Franchise returnFranchise = new Franchise();
         HttpStatus status;
-        // We first check if the author exists, this saves some computing time.
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
             returnFranchise = franchiseRepository.findById(id).get();
